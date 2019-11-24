@@ -1,17 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Games</title>
-</head>
-<body>
-    <section id="game-list">
-    {% for game in games %}
-        <article class="game">
-            <div>{{ game.home_team }}</div>
-            <div>{{ game.away_team }}</div>
-        </article>
-    {% endfor %}
-    </section>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block game_list %}
+{% for game in games %}
+    <article class="game">
+        <div>
+            <span>{{ game.hTeam.fullName }}</span>
+            <span>{{ game.hTeam.score.points }}</span>
+        </div>
+        <div>
+            <span>{{ game.vTeam.fullName }}</span>
+            <span>{{ game.vTeam.score.points }}</span>
+        </div>
+    </article>
+{% endfor %}
+{% endblock %}
+
+{% block home_team %}
+{% endblock %}
+
+{% block visiting_team %}
+{% endblock %}
