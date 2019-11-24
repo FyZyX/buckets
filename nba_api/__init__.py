@@ -26,7 +26,7 @@ class NBA:
         """
         key = f'games/{date}'
         if self.cache and key in self.cache:
-            return self.cache[key]
+            return self.cache[key]['api']['games']
 
         url = f"https://{self.host}/games/date/{date}"
 
