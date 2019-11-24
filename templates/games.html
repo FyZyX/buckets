@@ -4,8 +4,8 @@
 {% for game in games %}
     <article class="game">
         <div>
-            <span>{{ game.hTeam.fullName }}</span>
             <span>{{ game.hTeam.score.points }}</span>
+            <span>{{ game.hTeam.fullName }}</span>
         </div>
         <div>
             <span>{{ game.vTeam.fullName }}</span>
@@ -13,10 +13,4 @@
         </div>
     </article>
 {% endfor %}
-{% endblock %}
-
-{% block home_team %}
-{% endblock %}
-
-{% block visiting_team %}
 {% endblock %}

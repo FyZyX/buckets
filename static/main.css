@@ -14,6 +14,8 @@ main {
 .game {
     flex: 1;
     display: flex;
+    align-items: stretch;
+    justify-content: space-between;
     margin: 10px;
     border: solid 1px lightseagreen;
 }
@@ -22,10 +24,17 @@ main {
     flex: 1;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-start;
     border: solid 1px #6732b2;
 }
 
-.game div span {
+.game div:last-of-type {
+    justify-content: flex-end;
+}
 
+.game div span {
+    margin-right: 20px;
+    margin-left: 20px;
+    font-size: 1.2em;
+    text-transform: uppercase;
 }
