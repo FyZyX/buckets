@@ -1,17 +1,39 @@
-def games_by_date(date):
-    """
-    Get a list of games on a specified date.
+import requests
 
-    :param str date: Date formatted as YYYY-MM--DD
-    :return: List of game records
-    """
-    # TODO: This should return dynamic data depending on the date
-    data = [
-        {'home_team': 'Bucks',
-         'away_team': 'Celtics'},
-        {'home_team': 'Clippers',
-         'away_team': 'Bitches'},
-        {'home_team': 'Hawks',
-         'away_team': 'Lakers'},
-    ]
-    return data
+from nba_api.cache import FileSystemCache
+
+
+class NBA:
+    host = 'api-nba-v1.p.rapidapi.com'
+
+    def __init__(self, api_key, file_store='data'):
+        self.headers = {
+            'x-rapidapi-host': self.host,
+            'x-rapidapi-key': api_key,
+        }
+
+        self.cache = FileSystemCache(file_store)
+
+    def games_by_date(self, date):
+        """
+        Get a list of games on a specified date.
+
+        :param datetime.date date: Date on which games occurred
+        :return: List of game records
+        """
+        key = f'games/{date}'
+        if key in self.cache:
+            return self.cache[key]
+
+        url = f"https://{self.host}/games/date/{date}"
+
+        response = requests.request("GET", url, headers=self.headers)
+
+        # TODO: Check error based on the status
+        data = response.json()
+        self.cache[key] = data
+
+        # TODO: Create a list of Game objects from the raw data
+        game_data = data['api']['games']
+
+        return game_data
