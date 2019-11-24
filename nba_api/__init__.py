@@ -12,7 +12,10 @@ class NBA:
             'x-rapidapi-key': api_key,
         }
 
-        self.cache = FileSystemCache(file_store)
+        if file_store:
+            self.cache = FileSystemCache(file_store)
+        else:
+            self.cache = None
 
     def games_by_date(self, date):
         """
@@ -22,7 +25,7 @@ class NBA:
         :return: List of game records
         """
         key = f'games/{date}'
-        if key in self.cache:
+        if self.cache and key in self.cache:
             return self.cache[key]
 
         url = f"https://{self.host}/games/date/{date}"
@@ -31,7 +34,9 @@ class NBA:
 
         # TODO: Check error based on the status
         data = response.json()
-        self.cache[key] = data
+
+        if self.cache:
+            self.cache[key] = data
 
         # TODO: Create a list of Game objects from the raw data
         game_data = data['api']['games']
