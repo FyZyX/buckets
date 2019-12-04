@@ -1,0 +1,40 @@
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#game-list {
+    display: flex;
+    flex-flow: column;
+    height: 100vh;
+    width: 60vw;
+}
+
+.game {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    margin: 10px;
+    border: solid 1px lightseagreen;
+}
+
+.game div {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border: solid 1px #6732b2;
+}
+
+.game div:last-of-type {
+    justify-content: flex-end;
+}
+
+.game div span {
+    margin-right: 20px;
+    margin-left: 20px;
+    font-size: 1.2em;
+    text-transform: uppercase;
+}
