@@ -1,0 +1,24 @@
+{
+  "city": "Atlanta",
+  "fullName": "Atlanta Hawks",
+  "teamId": "1",
+  "nickname": "Hawks",
+  "logo": "https://upload.wikimedia.org/wikipedia/fr/e/ee/Hawks_2016.png",
+  "shortName": "ATL",
+  "allStar": "0",
+  "nbaFranchise": "1",
+  "leagues": {
+    "standard": {
+      "confName": "East",
+      "divName": "Southeast"
+    },
+    "vegas": {
+      "confName": "summer",
+      "divName": ""
+    },
+    "utah": {
+      "confName": "Utah",
+      "divName": ""
+    }
+  }
+}
