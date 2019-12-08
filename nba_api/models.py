@@ -3,7 +3,7 @@ from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine('sqlite:///:memory:', echo=True)
+engine = create_engine('sqlite:///nba.db', echo=True)
 Base = declarative_base(bind=engine)
 
 
@@ -19,8 +19,6 @@ class Team(Base):
     all_star = Column(Integer)
     nba_franchise = Column(Integer)
 
-    home_games = relationship('Game', back_populates='home_team')
-    away_games = relationship('Game', back_populates='away_team')
     players = relationship('Player', back_populates='team')
     statistics = relationship('TeamStats', back_populates='team')
 
@@ -71,7 +69,7 @@ class Player(Base):
     weight_in_kilograms = Column(Float)
 
     team = relationship('Team', back_populates='players')
-    player = relationship('PlayerStats', back_populates='statistics')
+    statistics = relationship('PlayerStats', back_populates='player')
 
     def __init__(self, player_id, first_name, last_name, team_id, years_pro,
                  college_name, country, date_of_birth, affiliation,
@@ -134,10 +132,9 @@ class Game(Base):
     away_id = Column(Integer, ForeignKey('teams.id'))
     away_score = Column(Integer)
 
-    home_team = relationship('Team', foreign_keys=[home_id],
-                             back_populates='home_games')
-    away_team = relationship('Team', foreign_keys=[away_id],
-                             back_populates='away_games')
+    # TODO: figure out backrefs for home and away team
+    home_team = relationship('Team', foreign_keys=[home_id])
+    away_team = relationship('Team', foreign_keys=[away_id])
     team_statistics = relationship('TeamStats', back_populates='game')
     player_statistics = relationship('PlayerStats', back_populates='game')
 
@@ -169,8 +166,24 @@ class Game(Base):
 
     @classmethod
     def from_json(cls, game):
+        from pprint import pprint
+        pprint(game)
+        game_id = int(game['gameId'])
+        halftime = game['halftime']
+        halftime = bool(int(halftime)) if halftime else None
+        end_of_period = game['EndOfPeriod']
+        end_of_period = bool(int(end_of_period)) if end_of_period else None
+        season_stage = int(game['seasonStage'])
+        status_short_game = int(game['statusShortGame'])
+        home_id = int(game['hTeam']['teamId'])
+        home_score = game['hTeam']['score']['points']
+        home_score = int(home_score) if home_score else None
+        away_id = int(game['vTeam']['teamId'])
+        away_score = game['vTeam']['score']['points']
+        away_score = int(away_score) if away_score else None
+
         return cls(
-            game_id=int(game['gameId']),
+            game_id=game_id,
             season_year=game['seasonYear'],
             league=game['league'],
             start_time_utc=game['startTimeUTC'],
@@ -181,15 +194,15 @@ class Game(Base):
             clock=game['clock'],
             game_duration=game['gameDuration'],
             current_period=game['currentPeriod'],
-            halftime=bool(int(game['halftime'])),
-            end_of_period=bool(int(game['EndOfPeriod'])),
-            season_stage=int(game['seasonStage']),
-            status_short_game=int(game['statusShortGame']),
+            halftime=halftime,
+            end_of_period=end_of_period,
+            season_stage=season_stage,
+            status_short_game=status_short_game,
             status_game=game['statusGame'],
-            home_id=int(game['hTeam']['teamId']),
-            home_score=int(game['hTeam']['score']['points']),
-            away_id=int(game['vTeam']['teamId']),
-            away_score=int(game['vTeam']['score']['points']),
+            home_id=home_id,
+            home_score=home_score,
+            away_id=away_id,
+            away_score=away_score,
         )
 
     def __repr__(self):
