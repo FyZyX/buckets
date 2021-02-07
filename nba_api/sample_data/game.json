@@ -1,0 +1,38 @@
+{
+  "seasonYear": "2018",
+  "league": "standard",
+  "gameId": "4400",
+  "startTimeUTC": "2018-10-19T00:00:00.000Z",
+  "endTimeUTC": "2018-10-19T02:34:00.000Z",
+  "arena": "Wells Fargo Center",
+  "city": "Philadelphia",
+  "country": "USA",
+  "clock": "",
+  "gameDuration": "2:19",
+  "currentPeriod": "4/4",
+  "halftime": "0",
+  "EndOfPeriod": "0",
+  "seasonStage": "2",
+  "statusShortGame": "3",
+  "statusGame": "Finished",
+  "vTeam": {
+    "teamId": "6",
+    "shortName": "CHI",
+    "fullName": "Chicago Bulls",
+    "nickName": "Bulls",
+    "logo": "https://upload.wikimedia.org/wikipedia/fr/thumb/d/d1/Bulls_de_Chicago_logo.svg/1200px-Bulls_de_Chicago_logo.svg.png",
+    "score": {
+      "points": "108"
+    }
+  },
+  "hTeam": {
+    "teamId": "27",
+    "shortName": "PHI",
+    "fullName": "Philadelphia 76ers",
+    "nickName": "76ers",
+    "logo": "https://upload.wikimedia.org/wikipedia/fr/4/48/76ers_2016.png",
+    "score": {
+      "points": "127"
+    }
+  }
+}

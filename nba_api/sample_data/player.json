@@ -1,0 +1,21 @@
+{
+  "firstName": "Alex",
+  "lastName": "Abrines",
+  "teamId": "25",
+  "yearsPro": "2",
+  "collegeName": "",
+  "country": "Spain",
+  "playerId": "1",
+  "dateOfBirth": "1993-08-01",
+  "affiliation": "Spain/Spain",
+  "startNba": "2016",
+  "heightInMeters": "1.98",
+  "weightInKilograms": "90.7",
+  "leagues": {
+    "standard": {
+      "jersey": "8",
+      "active": "1",
+      "pos": "G"
+    }
+  }
+}
